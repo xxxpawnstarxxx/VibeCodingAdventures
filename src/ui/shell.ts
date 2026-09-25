@@ -12,6 +12,8 @@ import { layersPanel } from './panels/layersPanel';
 import { historyPanel } from './panels/historyPanel';
 import { setTooltipsEnabled } from './tooltip';
 import { addLayer, changeSelection, deleteLayer, duplicateLayer, editPixels, mergeDown, pushEntry, remapDocument, resizeDocument, setLayerProps } from '../app/ops';
+import { pickSample, sampleUrl } from '../features/samples';
+import { openSample } from '../features/io';
 import { copySelection, exportDialog, importImage, openAny, openNewDocDialog, pasteImage, restoreAutosave, saveProject } from '../features/io';
 import { FILTERS, openFilter } from '../features/filters';
 import { openAdjustDialog } from '../features/adjust';
@@ -64,6 +66,8 @@ function menus(): Menu[] {
       { label: 'Save project', icon: 'save', key: `${modKey}+S`, tip: 'Download a .flowpaint file with all layers, references and guides - reopen it later to keep working.', action: () => void saveProject() },
       { label: 'Export image…', icon: 'download', key: `${modKey}+Shift+E`, tip: 'Save a flat PNG, JPEG or WebP picture to share or print.', action: () => void exportDialog() },
       { sep: true, label: '' },
+      { label: 'Open sample picture…', icon: 'sparkles', tip: 'Start a painting from one of the built-in pictures: two original paintings (gouache meadow, watercolour lake), still life, sunset, city, flowers, abstract.', action: () => void openSample() },
+      { label: 'Import sample picture as layer…', icon: 'image', tip: 'Add a built-in sample picture as an adjustable photo layer.', action: () => void openSample(true) },
       { label: 'Import image as layer…', icon: 'image', key: `${modKey}+Shift+O`, tip: 'Add a photo or picture as a new adjustable layer (brightness, saturation…). You can also drag & drop or paste images.', action: () => void importImage() },
       { label: 'Rotoscope a video…', icon: 'video', tip: 'Import a video and trace over it frame by frame to make an animation.', action: async () => { const [f] = await pickFile('video/*'); if (f) await importVideo(f); } },
       { label: 'Timelapse…', icon: 'timer', tip: 'Replay how your painting was made and export it as a video.', action: () => void timelapse.openPlayer() },
@@ -122,6 +126,7 @@ function menus(): Menu[] {
       { label: 'Extract colour palette…', icon: 'palette', tip: 'Find the main colours of a picture and what % of it each colour covers.', action: openPaletteDialog },
       { label: 'Coloured ASCII art…', icon: 'ascii', tip: 'Turn a picture into coloured text characters.', action: openAsciiDialog },
       { sep: true, label: '' },
+      { label: 'Pin sample reference…', icon: 'pin', tip: 'Pin one of the built-in sample pictures as a floating reference.', action: async () => { const r = await pickSample('Pin a sample reference'); if (r) references.add(sampleUrl(r.sample), r.sample.name); } },
       { label: 'Pin reference image…', icon: 'pin', tip: 'Float a reference picture over your workspace. Zoom, flip, check values and pick colours from it.', action: () => void references.addFromFile() },
       { label: 'Pin snapshot of canvas', icon: 'pin', tip: 'Pin the current state of your painting as a reference to compare against later.', action: () => references.addCanvasSnapshot() },
     ] },

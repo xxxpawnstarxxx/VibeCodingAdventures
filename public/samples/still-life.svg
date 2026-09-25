@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200">
+  <defs>
+    <radialGradient id="wall" cx="0.35" cy="0.3" r="0.9"><stop offset="0" stop-color="#8a6b4f"/><stop offset="0.6" stop-color="#4a3526"/><stop offset="1" stop-color="#1f150f"/></radialGradient>
+    <linearGradient id="table" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e3f22"/><stop offset="1" stop-color="#2d170b"/></linearGradient>
+    <linearGradient id="cloth" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3efe6"/><stop offset="1" stop-color="#b9b3a6"/></linearGradient>
+    <radialGradient id="apple" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#ff8a5c"/><stop offset="0.45" stop-color="#c7231c"/><stop offset="1" stop-color="#4d0908"/></radialGradient>
+    <radialGradient id="orange" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#ffd36b"/><stop offset="0.5" stop-color="#f08a12"/><stop offset="1" stop-color="#7a3a03"/></radialGradient>
+    <radialGradient id="pear" cx="0.35" cy="0.35" r="0.8"><stop offset="0" stop-color="#f1f28a"/><stop offset="0.5" stop-color="#a9b82d"/><stop offset="1" stop-color="#3f4a0c"/></radialGradient>
+    <radialGradient id="grape" cx="0.35" cy="0.3" r="0.7"><stop offset="0" stop-color="#b58ad8"/><stop offset="0.5" stop-color="#4b2170"/><stop offset="1" stop-color="#1a0a2a"/></radialGradient>
+    <linearGradient id="jug" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1b3a5c"/><stop offset="0.35" stop-color="#5d8fbf"/><stop offset="0.55" stop-color="#2d5680"/><stop offset="1" stop-color="#0d1f33"/></linearGradient>
+    <radialGradient id="bowl" cx="0.5" cy="0.2" r="0.9"><stop offset="0" stop-color="#e9d9b8"/><stop offset="0.6" stop-color="#b08a55"/><stop offset="1" stop-color="#4f3a1d"/></radialGradient>
+    <filter id="tex"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0.12 0"/><feComposite in2="SourceGraphic" operator="in"/><feBlend in="SourceGraphic" mode="multiply"/></filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+  <g filter="url(#tex)">
+  <rect width="1600" height="1200" fill="url(#wall)"/>
+  <rect y="760" width="1600" height="440" fill="url(#table)"/>
+  <path d="M180 760 Q420 700 760 770 Q1100 820 1420 760 L1500 1200 L80 1200 Z" fill="url(#cloth)"/>
+  <path d="M320 900 Q520 860 700 930 M820 1000 Q1000 950 1250 1010" stroke="#9c958a" stroke-width="10" fill="none" opacity="0.5"/>
+  <ellipse cx="760" cy="1010" rx="520" ry="60" fill="#000" opacity="0.35" filter="url(#soft)"/>
+  <path d="M1020 360 Q1000 300 1060 290 L1150 290 Q1210 300 1190 360 Q1260 440 1260 600 Q1260 820 1105 840 Q950 820 950 600 Q950 440 1020 360 Z" fill="url(#jug)"/>
+  <path d="M1190 420 Q1300 420 1290 540 Q1280 640 1220 660" stroke="#1b3a5c" stroke-width="28" fill="none"/>
+  <path d="M1040 470 Q1030 600 1060 760" stroke="#bfe0ff" stroke-width="14" fill="none" opacity="0.55"/>
+  <path d="M420 800 Q430 960 740 970 Q1050 960 1060 800 Z" fill="url(#bowl)"/>
+  <ellipse cx="740" cy="800" rx="320" ry="44" fill="#6b4c24"/>
+  <circle cx="600" cy="740" r="110" fill="url(#orange)"/>
+  <circle cx="800" cy="720" r="120" fill="url(#apple)"/>
+  <path d="M800 610 Q810 570 830 560" stroke="#3a2210" stroke-width="10" fill="none"/>
+  <path d="M835 575 Q880 540 910 570 Q870 600 835 575 Z" fill="#3f7a24"/>
+  <path d="M930 790 Q900 700 950 640 Q980 600 990 560 Q1010 610 1040 650 Q1090 720 1040 800 Q990 830 930 790 Z" fill="url(#pear)"/>
+  <g>
+    <circle cx="470" cy="800" r="38" fill="url(#grape)"/><circle cx="520" cy="820" r="38" fill="url(#grape)"/>
+    <circle cx="440" cy="850" r="38" fill="url(#grape)"/><circle cx="495" cy="870" r="38" fill="url(#grape)"/>
+    <circle cx="455" cy="910" r="38" fill="url(#grape)"/><circle cx="410" cy="890" r="36" fill="url(#grape)"/>
+  </g>
+  <circle cx="330" cy="960" r="70" fill="url(#apple)"/>
+  <path d="M1250 930 Q1300 900 1360 930 Q1320 960 1250 930 Z" fill="#3f7a24"/>
+  </g>
+</svg>

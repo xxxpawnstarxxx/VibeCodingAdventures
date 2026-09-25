@@ -29,12 +29,15 @@ import { newDocument, exportImageDataURL, serialize, deserialize, DOC_PRESETS } 
 import { references } from '../features/references';
 import { sampleColor } from '../tools/tool';
 import { setPerspective } from '../tools/transformTools';
+import { SAMPLES, loadSample } from '../features/samples';
+import { PALETTE_PRESETS } from '../ui/panels/colorPanel';
 import { importVideo, rotoInfo, setFrame } from '../features/rotoscope';
 
 type Args = Record<string, any>;
 interface Command { description: string; params: Record<string, string>; example?: Args; run(a: Args): unknown | Promise<unknown> }
 
 async function loadImage(src: string): Promise<ImageBitmap> {
+  if (SAMPLES.some((s) => s.id === src)) return loadSample(src);
   const res = await fetch(src);
   if (!res.ok) throw new Error(`Could not load image (${res.status})`);
   return createImageBitmap(await res.blob());
@@ -227,7 +230,7 @@ export const COMMANDS: Record<string, Command> = {
       return l.adjustments;
     },
   },
-  importImage: { description: 'Import an image (URL or data URL) as a new adjustable photo layer.', params: { src: 'URL or data URL', name: 'layer name', fit: 'fit | fill | actual' }, async run(a) { const bmp = await loadImage(a.src); return layerInfo(addImageLayer(bmp, a.name ?? 'Imported image', a.fit ?? 'fit')); } },
+  importImage: { description: 'Import an image (URL or data URL) as a new adjustable photo layer.', params: { src: 'URL, data URL or a sample id (see listSamples)', name: 'layer name', fit: 'fit | fill | actual' }, async run(a) { const bmp = await loadImage(a.src); return layerInfo(addImageLayer(bmp, a.name ?? 'Imported image', a.fit ?? 'fit')); } },
   extractPalette: { description: 'Dominant colours with the % of the image each covers.', params: { count: 'number of colours (default 8)', source: 'picture | layer | URL/data URL' }, async run(a) {
     await app.backend.flush();
     const src = a.source && a.source !== 'picture' && a.source !== 'layer' ? await loadImage(a.source) : a.source === 'layer' ? app.doc.active.canvas : app.doc.flatten({ background: true });
@@ -270,6 +273,8 @@ export const COMMANDS: Record<string, Command> = {
     return rotoInfo();
   } },
   animation: { description: 'Rotoscope timeline: go to a frame, or read the state.', params: { frame: 'frame index to show (optional)' }, async run(a) { if (a.frame !== undefined) await setFrame(a.frame); return rotoInfo(); } },
+  loadPalette: { description: 'Replace the swatches with a preset palette.', params: { name: `one of: ${PALETTE_PRESETS.map((p) => p.name).join(' | ')}` }, run(a) { const p = PALETTE_PRESETS.find((x) => x.name.toLowerCase().startsWith(String(a.name).toLowerCase())); if (!p) throw new Error('Unknown palette'); app.settings.swatches = [...p.colors]; app.saveSettings(); return p.colors; } },
+  listSamples: { description: 'Built-in sample pictures (use their id as `sample` in importImage, remake, extractPalette).', params: {}, run: () => SAMPLES.map((s) => ({ id: s.id, name: s.name, description: s.desc })) },
   pinReference: { description: 'Pin a reference image window.', params: { src: 'URL or data URL', name: 'title' }, run(a) { references.add(a.src, a.name ?? 'Reference'); return true; } },
 };
 

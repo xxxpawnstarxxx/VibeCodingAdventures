@@ -10,6 +10,7 @@ import { addImageLayer } from './adjust';
 import { DEFAULT_ADJUSTMENTS } from '../wasm/wasm';
 import { references } from './references';
 import { timelapse } from './timelapse';
+import { pickSample } from './samples';
 import { addLayer, editPixels } from '../app/ops';
 import { importVideo } from './rotoscope';
 
@@ -113,6 +114,7 @@ export function openNewDocDialog(welcome = false, hasAutosave = false): void {
   if (welcome) {
     d.footer.append(
       button('Open file…', { icon: 'folder', tip: 'Open a saved Flowpaint project or any image.', onClick: async () => { d.close(); await openAny(); } }),
+      button('Try a sample picture', { icon: 'sparkles', tip: 'Start from one of the built-in paintings and photos - great for practice.', onClick: async () => { d.close(); await openSample(); } }),
     );
     if (hasAutosave) d.footer.append(button('Continue last painting', { icon: 'history', tip: 'Restore the painting you were working on (auto-saved in this browser).', onClick: async () => { d.close(); await restoreAutosave(); } }));
   } else d.footer.append(button('Cancel', { onClick: () => d.close() }));
@@ -191,6 +193,20 @@ export async function saveProject(): Promise<void> {
   app.toast('Project saved with all layers.', 'success');
 }
 
+/** Open a built-in sample picture as a new painting (photo layer + empty layer on top). */
+export async function openSample(asLayer = false): Promise<void> {
+  const r = await pickSample(asLayer ? 'Import a sample picture' : 'Open a sample picture', asLayer ? 'Adds the picture as an adjustable photo layer.' : 'Opens the picture as a new painting with an empty layer on top to paint on.');
+  if (!r) return;
+  if (asLayer) { addImageLayer(r.bitmap, r.sample.name); return; }
+  newDocument(r.bitmap.width, r.bitmap.height, { name: r.sample.name });
+  const empty = app.doc.layers[0];
+  addImageLayer(r.bitmap, r.sample.name, 'fit');
+  app.doc.removeLayer(empty);
+  app.doc.insertLayer(app.doc.createLayer('Paint'));
+  app.history.clear();
+  app.toast(`Opened "${r.sample.name}". Paint on the top layer - the picture stays untouched below.`, 'success');
+}
+
 export async function openAny(): Promise<void> {
   const files = await pickFile('.flowpaint,.json,image/*,video/*');
   for (const f of files) await openFile(f, true);
@@ -209,7 +225,9 @@ export async function openFile(f: File, asNewDoc = false): Promise<void> {
       const bmp = await createImageBitmap(f);
       if (asNewDoc) {
         newDocument(bmp.width, bmp.height, { name: f.name.replace(/\.\w+$/, '') });
+        const empty = app.doc.layers[0];
         addImageLayer(bmp, f.name.replace(/\.\w+$/, ''), 'fit');
+        app.doc.removeLayer(empty);
         const top = app.doc.createLayer('Paint');
         app.doc.insertLayer(top);
         app.history.clear();

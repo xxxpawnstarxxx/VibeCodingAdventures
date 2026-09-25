@@ -17,6 +17,7 @@ import { h, svgIcon } from '../ui/dom';
 import { icon } from '../ui/icons';
 import { button, select, slider, toggle } from '../ui/controls';
 import { openDialog, pickFile } from '../ui/dialog';
+import { pickSample } from './samples';
 
 type Mode = 'autopaint' | 'blockin' | 'values' | 'numbers' | 'trace';
 type Style = 'impressionist' | 'expressionist' | 'pointillist' | 'watercolor' | 'sketch';
@@ -430,6 +431,7 @@ export function openRemakeDialog(initial?: Mode): void {
       srcPreview,
       h('div', { class: 'col' },
         button('Choose picture…', { icon: 'upload', primary: true, tip: 'Open an image file from your computer.', onClick: async () => { const [f] = await pickFile('image/*'); if (f) setSrc(await createImageBitmap(f), f.name); } }),
+        button('Sample picture…', { icon: 'sparkles', tip: 'Choose one of the built-in sample pictures (landscapes, still life, flowers…).', onClick: async () => { const r = await pickSample('Pick a picture to remake'); if (r) setSrc(r.bitmap, r.sample.name); } }),
         button('Use current painting', { icon: 'image', tip: 'Remake what is on the canvas right now.', onClick: async () => { await app.backend.flush(); setSrc(app.doc.flatten({ background: true }), 'Current painting'); } }),
         button('Use current layer', { icon: 'layers', tip: 'Remake the selected layer (e.g. an imported photo).', onClick: async () => { await app.backend.flush(); setSrc(app.doc.active.canvas, app.doc.active.name); } }),
       )),

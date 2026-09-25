@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050a1e"/><stop offset="0.6" stop-color="#1b2a5e"/><stop offset="1" stop-color="#4a3a78"/></linearGradient>
+    <radialGradient id="moon" cx="0.4" cy="0.4" r="0.6"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#d9d2b0"/></radialGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#fff4c2" stop-opacity="0.5"/><stop offset="1" stop-color="#fff4c2" stop-opacity="0"/></radialGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2340"/><stop offset="1" stop-color="#0c0a16"/></linearGradient>
+    <pattern id="win" width="36" height="44" patternUnits="userSpaceOnUse"><rect width="36" height="44" fill="none"/><rect x="8" y="10" width="14" height="20" fill="#ffd36e"/></pattern>
+    <pattern id="win2" width="30" height="36" patternUnits="userSpaceOnUse"><rect x="6" y="8" width="12" height="16" fill="#7fd6ff" opacity="0.8"/></pattern>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#sky)"/>
+  <g fill="#fff">
+    <circle cx="120" cy="80" r="2"/><circle cx="300" cy="150" r="1.5"/><circle cx="520" cy="60" r="2"/><circle cx="700" cy="180" r="1.5"/><circle cx="880" cy="90" r="2"/><circle cx="1400" cy="70" r="2"/><circle cx="1520" cy="200" r="1.5"/><circle cx="1000" cy="220" r="1.2"/><circle cx="220" cy="260" r="1.2"/>
+  </g>
+  <circle cx="1240" cy="190" r="150" fill="url(#glow)"/><circle cx="1240" cy="190" r="70" fill="url(#moon)"/>
+  <g fill="#0e1330">
+    <rect x="0" y="520" width="180" height="580"/><rect x="200" y="420" width="140" height="680"/><rect x="360" y="560" width="160" height="540"/>
+    <rect x="540" y="320" width="130" height="780"/><rect x="690" y="480" width="200" height="620"/><rect x="910" y="380" width="150" height="720"/>
+    <rect x="1080" y="540" width="180" height="560"/><rect x="1280" y="440" width="140" height="660"/><rect x="1440" y="580" width="160" height="520"/>
+    <path d="M605 320 L605 230 L612 230 L612 320 Z"/>
+  </g>
+  <g opacity="0.85">
+    <rect x="210" y="440" width="120" height="560" fill="url(#win)"/><rect x="550" y="340" width="110" height="660" fill="url(#win2)"/>
+    <rect x="700" y="500" width="180" height="500" fill="url(#win)" opacity="0.6"/><rect x="920" y="400" width="130" height="600" fill="url(#win2)"/>
+    <rect x="1290" y="460" width="120" height="540" fill="url(#win)" opacity="0.7"/><rect x="10" y="540" width="160" height="460" fill="url(#win2)" opacity="0.5"/>
+  </g>
+  <rect y="960" width="1600" height="140" fill="url(#road)"/>
+  <g fill="#ff4d6d" opacity="0.9"><rect x="120" y="1000" width="60" height="6"/><rect x="560" y="1030" width="90" height="6"/></g>
+  <g fill="#fff3b0" opacity="0.9"><rect x="900" y="1010" width="80" height="6"/><rect x="1300" y="1040" width="100" height="6"/></g>
+  <circle cx="780" cy="940" r="60" fill="url(#glow)"/><rect x="776" y="860" width="8" height="100" fill="#0e1330"/><circle cx="780" cy="860" r="10" fill="#fff4c2"/>
+</svg>

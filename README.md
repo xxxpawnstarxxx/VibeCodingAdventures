@@ -31,6 +31,8 @@ get the same paint model on the CPU automatically. You can force it with `?backe
 | **Tools** | Brush, eraser, blend/smudge, fill bucket (tolerance, grow edge, look at all layers, rainbow fill), gradient (linear/radial/angle/mirror/diamond; perceptual, paint-like or RGB blending; dithered), colour picker with loupe, shapes (line, arrow, rectangle with rounded corners, ellipse, polygon, star; filled, outlined or brush-painted), select box/ellipse, freehand and polygon lasso, magic wand, move/scale/rotate/flip, crop with aspect presets, guides, hand, zoom |
 | **Selections** | New, add, subtract and intersect, plus feather, grow/shrink, invert, and select layer content. Every tool and effect respects the selection. |
 | **Layers** | Blend modes (17), opacity, lock, lock transparency, rename, drag to reorder, duplicate, merge, flatten. Photo layers stay adjustable. |
+| **Sample pictures** | Built-in gallery: your two original paintings (gouache alpine meadow, watercolour mountain lake) plus still life, ocean sunset, night city, sunflowers and abstract shapes. Open as a painting, import as a layer, pin as a reference, or use as the source for Remake, palette extraction and ASCII art. |
+| **Preset palettes** | 11 ready-made swatch palettes (including colours from the two sample paintings, classic limited palette, earth, pastel, sunset, ocean, forest, skin tones, greyscale values, neon). |
 | **Import / export** | Open or drag & drop images, paste from the clipboard, `.flowpaint` projects (all layers, references and guides). Export PNG/JPEG/WebP at any scale, the current layer only, or the selection. Copy to clipboard. Autosave to IndexedDB. |
 | **Photo adjustments** | Exposure, brightness, contrast, highlights, shadows, saturation, vibrance, hue, warmth, tint, mid-tones, black & white, sepia, invert, posterize, plus an Auto button. Adjustments stay non-destructive on photo layers. |
 | **Remake a picture** | *Auto-paint* repaints an image stroke by stroke (impressionist, expressionist, pointillist, watercolour, sketch) as an animation. Also *colour block-in*, *value study*, *paint by numbers* (regions, numbers and a colour key) and *tracing setup* (faded photo, a colour contour guide and a grid). |
@@ -69,7 +71,7 @@ Commands include: `getState, newDocument, listTools, setTool, setColor, listBrus
 drawShape, fill, gradient, pickColor, addLayer, selectLayer, setLayer, deleteLayer, duplicateLayer, mergeDown,
 moveLayer, select, clearSelectionPixels, listFilters, applyFilter, adjustImage, importImage, extractPalette,
 asciiArt, remake, importVideo, animation, symmetry, stabilizer, guides, resizeCanvas, scaleImage, crop, undo,
-redo, history, jumpHistory, view, exportImage, snapshot, saveProject, loadProject, pinReference`.
+redo, history, jumpHistory, listSamples, loadPalette, view, exportImage, snapshot, saveProject, loadProject, pinReference`.
 
 ## Architecture
 

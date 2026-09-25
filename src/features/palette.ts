@@ -8,6 +8,7 @@ import { addLayer } from '../app/ops';
 import { h } from '../ui/dom';
 import { button, select, slider } from '../ui/controls';
 import { openDialog, pickFile } from '../ui/dialog';
+import { pickSample } from './samples';
 
 export interface PaletteEntry { hex: string; rgb: RGB; percent: number }
 
@@ -127,7 +128,8 @@ export function openPaletteDialog(): void {
       list.append(row);
     }
   };
-  const srcSel = select('Colours from', source, [{ value: 'picture', label: 'Whole picture' }, { value: 'layer', label: 'Current layer' }, { value: 'file', label: 'An image file…' }], async (v) => {
+  const srcSel = select('Colours from', source, [{ value: 'picture', label: 'Whole picture' }, { value: 'layer', label: 'Current layer' }, { value: 'file', label: 'An image file…' }, { value: 'sample' as 'file', label: 'A sample picture…' }], async (v) => {
+    if ((v as string) === 'sample') { const r = await pickSample(); if (r) fileImg = r.bitmap; source = 'file'; void run(); return; }
     source = v;
     if (v === 'file') { const [f] = await pickFile('image/*'); if (!f) return; fileImg = await createImageBitmap(f); }
     void run();

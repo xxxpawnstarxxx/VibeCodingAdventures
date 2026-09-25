@@ -396,3 +396,15 @@ body.focus-mode .app { grid-template-rows: 0 0 1fr 0; }
   .workspace { grid-template-columns: auto 1fr; }
   .brand span:last-child { display: none; }
 }
+
+/* sample gallery */
+.sample-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+.sample-card { display: flex; flex-direction: column; gap: 4px; padding: 6px; background: var(--bg1); border: 1px solid var(--line); border-radius: 10px; cursor: pointer; text-align: left; }
+.sample-card:hover { border-color: var(--accent); background: var(--bg3); }
+.sample-card.loading { opacity: .5; pointer-events: none; }
+.sample-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; background: #111; }
+.sample-name { font-weight: 600; font-size: 12.5px; }
+.sample-desc { color: var(--text3); font-size: 11.5px; line-height: 1.35; }
+.sub-row { justify-content: space-between; margin-top: 6px; }
+.sub-row .sub-title { margin: 0; }
+.small-select { height: 24px; font-size: 11.5px; padding: 0 4px; max-width: 150px; }

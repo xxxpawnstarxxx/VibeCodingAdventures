@@ -5,6 +5,33 @@ import { icon } from '../icons';
 import { segmented } from '../controls';
 import { cssRgb, fromOklch, hexToRgb, hsvToRgb, oklch, rgbToHex, rgbToHsv, type RGB } from '../../core/color';
 
+export const PALETTE_PRESETS: { name: string; tip: string; colors: string[] }[] = [
+  { name: 'Alpine meadow (gouache)', tip: 'Colours from the sample gouache painting: peach sky, blue-violet peaks, pine greens, turquoise river.', colors: ['#f1e4cf', '#f4c9a8', '#8a8fb8', '#5f7fa6', '#3f5f78', '#2e4a44', '#1f3532', '#9fbf8f', '#6f9a72', '#5fc7c0', '#f6c9a4', '#f2d46b', '#ffffff', '#6b4a3a'] },
+  { name: 'Mountain lake (watercolour)', tip: 'Colours from the sample watercolour: orange sunset, lavender mountains, teal water, autumn grass.', colors: ['#efe6d5', '#f7a64a', '#f2c27a', '#d88a7a', '#b89bd6', '#7d65b0', '#5a4a8a', '#6fb8bb', '#3f6f7a', '#3c4a2e', '#c9892f', '#8a6a4a'] },
+  { name: 'Classic painter (limited)', tip: 'A traditional limited palette: titanium white, cadmium yellow, yellow ochre, cadmium red, alizarin, ultramarine, phthalo, burnt umber, ivory black.', colors: ['#f7f5ef', '#ffd21f', '#c99a2e', '#e2341d', '#8e1b2c', '#223a8f', '#0f4f5a', '#5b3a24', '#1c1b1a'] },
+  { name: 'Earth tones', tip: 'Warm natural browns, ochres, siennas and greens.', colors: ['#f0e3c8', '#d9b77c', '#c28a3e', '#a0522d', '#7b3f1d', '#5b4636', '#6b7a3a', '#3f4a2a', '#2b2320'] },
+  { name: 'Pastel dream', tip: 'Soft, light, gentle colours.', colors: ['#fde2e4', '#fad2e1', '#e2ece9', '#bee1e6', '#cddafd', '#dfe7fd', '#fff1c1', '#e9d5ff', '#c7f9cc'] },
+  { name: 'Sunset', tip: 'Warm glowing sky colours.', colors: ['#1c1f4a', '#4b2c6f', '#7b3f8c', '#c2477a', '#f06a5c', '#ff9b5a', '#ffc36b', '#fff0c2'] },
+  { name: 'Ocean', tip: 'Blues, teals and foam.', colors: ['#03045e', '#023e8a', '#0077b6', '#0096c7', '#00b4d8', '#48cae4', '#90e0ef', '#caf0f8', '#f1faee'] },
+  { name: 'Forest', tip: 'Deep greens, moss and bark.', colors: ['#081c15', '#1b4332', '#2d6a4f', '#40916c', '#52b788', '#95d5b2', '#d8f3dc', '#6b4f2a', '#3e2c1c'] },
+  { name: 'Skin tones', tip: 'A range of natural skin tones from light to deep.', colors: ['#fde7d6', '#f6d0b1', '#eab48f', '#d8a07a', '#c68863', '#a86b4a', '#8a5236', '#6b3d26', '#4a2a1a', '#2e1a10'] },
+  { name: 'Greyscale values', tip: '9 steps from white to black - for value studies.', colors: ['#ffffff', '#e0e0e0', '#c0c0c0', '#a0a0a0', '#808080', '#606060', '#404040', '#202020', '#000000'] },
+  { name: 'Neon pop', tip: 'Bright saturated colours for bold, fun art.', colors: ['#ff006e', '#fb5607', '#ffbe0b', '#8ac926', '#00f5d4', '#3a86ff', '#8338ec', '#111111'] },
+];
+
+function paletteSelect(): HTMLElement {
+  const s = h('select', { class: 'select small-select', 'aria-label': 'Load a preset palette', tip: { title: 'Preset palettes', desc: 'Replace your swatches with a ready-made palette - including colours taken from the two sample paintings.' } });
+  s.append(h('option', { value: '' }, 'Load palette…'));
+  PALETTE_PRESETS.forEach((p, i) => s.append(h('option', { value: String(i), title: p.tip }, p.name)));
+  s.addEventListener('change', () => {
+    const p = PALETTE_PRESETS[Number(s.value)];
+    if (p) { app.settings.swatches = [...p.colors]; app.saveSettings(); app.toast(`Loaded palette "${p.name}".`, 'success'); }
+    s.value = '';
+  });
+  s.addEventListener('keydown', (e) => e.stopPropagation());
+  return s;
+}
+
 export function colorPanel(): HTMLElement {
   let [hue, sat, val] = rgbToHsv(app.color);
   let mode: 'hsv' | 'rgb' | 'oklch' = 'hsv';
@@ -156,7 +183,7 @@ export function colorPanel(): HTMLElement {
     segmented(mode, [{ value: 'hsv', label: 'Simple', tip: 'Hue, colourfulness and brightness.' }, { value: 'rgb', label: 'RGB', tip: 'Red, green and blue light channels.' }, { value: 'oklch', label: 'Perceptual', tip: 'OKLCH: change lightness without the hue shifting.' }], (v) => { mode = v; renderSliders(); }, 'mini'),
     sliders,
     h('div', { class: 'sub-title' }, 'Matching colours'), harmony,
-    h('div', { class: 'sub-title' }, 'Swatches'), swatches,
+    h('div', { class: 'row sub-row' }, h('div', { class: 'sub-title' }, 'Swatches'), paletteSelect()), swatches,
     h('div', { class: 'sub-title' }, 'Recently used'), recent,
   );
   renderSwatches();

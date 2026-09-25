@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c1f4a"/><stop offset="0.35" stop-color="#7b3f8c"/><stop offset="0.6" stop-color="#f06a5c"/><stop offset="0.75" stop-color="#ffc36b"/></linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f08a64"/><stop offset="0.25" stop-color="#6b3f7a"/><stop offset="1" stop-color="#101a3d"/></linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#fff6d0"/><stop offset="0.6" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff9b5a" stop-opacity="0"/></radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2"/><feColorMatrix values="0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.1 0"/><feComposite in2="SourceGraphic" operator="in"/><feBlend in="SourceGraphic" mode="multiply"/></filter>
+  </defs>
+  <g filter="url(#grain)">
+  <rect width="1600" height="620" fill="url(#sky)"/>
+  <circle cx="800" cy="600" r="170" fill="url(#sun)"/>
+  <g fill="#ffb18a" opacity="0.55" filter="url(#blur)">
+    <ellipse cx="380" cy="260" rx="260" ry="26"/><ellipse cx="1180" cy="200" rx="320" ry="30"/><ellipse cx="900" cy="340" rx="220" ry="18"/><ellipse cx="260" cy="420" rx="200" ry="16"/>
+  </g>
+  <rect y="600" width="1600" height="400" fill="url(#sea)"/>
+  <g stroke="#ffd9a0" stroke-linecap="round" opacity="0.8">
+    <path d="M720 625 H880" stroke-width="6"/><path d="M690 650 H910" stroke-width="5"/><path d="M740 680 H860" stroke-width="5"/>
+    <path d="M650 715 H950" stroke-width="4"/><path d="M700 760 H900" stroke-width="4"/><path d="M620 820 H980" stroke-width="3"/>
+  </g>
+  <path d="M0 640 Q200 600 360 640 L360 1000 L0 1000 Z" fill="#1a1433"/>
+  <path d="M1250 660 Q1400 590 1600 620 L1600 1000 L1250 1000 Z" fill="#150f2c"/>
+  <path d="M1360 640 L1372 470 L1384 640 Z" fill="#150f2c"/><circle cx="1372" cy="470" r="9" fill="#ffe7a8"/>
+  <path d="M520 780 L560 780 L590 740 L600 800 L500 800 Z" fill="#150f2c"/><path d="M560 740 L560 640 L600 740 Z" fill="#241a44"/>
+  </g>
+</svg>

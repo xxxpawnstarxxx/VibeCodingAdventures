@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1500" viewBox="0 0 1200 1500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fa8c9"/><stop offset="1" stop-color="#1f5d7a"/></linearGradient>
+    <linearGradient id="vase" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8a3b12"/><stop offset="0.4" stop-color="#e0843f"/><stop offset="1" stop-color="#5a2208"/></linearGradient>
+    <radialGradient id="c" cx="0.4" cy="0.4" r="0.6"><stop offset="0" stop-color="#8a5a1a"/><stop offset="1" stop-color="#2e1a07"/></radialGradient>
+    <symbol id="flower" viewBox="-120 -120 240 240">
+      <g fill="#f5b90f" stroke="#c77a05" stroke-width="3">
+        <ellipse rx="22" ry="70" transform="rotate(0) translate(0 -60)"/><ellipse rx="22" ry="70" transform="rotate(30) translate(0 -60)"/><ellipse rx="22" ry="70" transform="rotate(60) translate(0 -60)"/>
+        <ellipse rx="22" ry="70" transform="rotate(90) translate(0 -60)"/><ellipse rx="22" ry="70" transform="rotate(120) translate(0 -60)"/><ellipse rx="22" ry="70" transform="rotate(150) translate(0 -60)"/>
+        <ellipse rx="22" ry="70" transform="rotate(180) translate(0 -60)"/><ellipse rx="22" ry="70" transform="rotate(210) translate(0 -60)"/><ellipse rx="22" ry="70" transform="rotate(240) translate(0 -60)"/>
+        <ellipse rx="22" ry="70" transform="rotate(270) translate(0 -60)"/><ellipse rx="22" ry="70" transform="rotate(300) translate(0 -60)"/><ellipse rx="22" ry="70" transform="rotate(330) translate(0 -60)"/>
+      </g>
+      <circle r="48" fill="url(#c)"/>
+    </symbol>
+    <filter id="tex"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="8"/><feColorMatrix values="0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.14 0"/><feComposite in2="SourceGraphic" operator="in"/><feBlend in="SourceGraphic" mode="multiply"/></filter>
+  </defs>
+  <g filter="url(#tex)">
+  <rect width="1200" height="1500" fill="url(#bg)"/>
+  <rect y="1180" width="1200" height="320" fill="#c9a36a"/>
+  <g stroke="#3d6b1f" stroke-width="16" fill="none">
+    <path d="M600 1000 Q560 700 380 420"/><path d="M600 1000 Q620 640 640 300"/><path d="M600 1000 Q700 760 880 520"/><path d="M600 1000 Q520 820 300 760"/><path d="M600 1000 Q760 880 960 880"/>
+  </g>
+  <g fill="#4f8a2a"><path d="M480 640 Q400 600 380 680 Q440 700 480 640Z"/><path d="M700 720 Q800 680 820 760 Q740 780 700 720Z"/></g>
+  <use href="#flower" x="260" y="300" width="240" height="240"/>
+  <use href="#flower" x="520" y="170" width="240" height="240"/>
+  <use href="#flower" x="770" y="400" width="220" height="220"/>
+  <use href="#flower" x="200" y="660" width="200" height="200"/>
+  <use href="#flower" x="860" y="780" width="200" height="200"/>
+  <path d="M430 980 Q400 1100 450 1260 L750 1260 Q800 1100 770 980 Z" fill="url(#vase)"/>
+  <ellipse cx="600" cy="980" rx="170" ry="30" fill="#6b2a0b"/>
+  <ellipse cx="600" cy="1268" rx="200" ry="22" fill="#000" opacity="0.25"/>
+  </g>
+</svg>

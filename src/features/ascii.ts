@@ -5,6 +5,7 @@ import { addLayer } from '../app/ops';
 import { h } from '../ui/dom';
 import { button, select, slider, toggle } from '../ui/controls';
 import { download, openDialog, pickFile } from '../ui/dialog';
+import { pickSample } from './samples';
 
 export const CHARSETS: Record<string, string> = {
   classic: ' .:-=+*#%@',
@@ -102,7 +103,8 @@ export function openAsciiDialog(): void {
   };
   d.body.append(
     h('div', { class: 'row wrap' },
-      select('Picture', source, [{ value: 'picture', label: 'Whole picture' }, { value: 'layer', label: 'Current layer' }, { value: 'file', label: 'An image file…' }], async (v) => {
+      select('Picture', source, [{ value: 'picture', label: 'Whole picture' }, { value: 'layer', label: 'Current layer' }, { value: 'file', label: 'An image file…' }, { value: 'sample' as 'file', label: 'A sample picture…' }], async (v) => {
+        if ((v as string) === 'sample') { const r = await pickSample(); if (r) fileImg = r.bitmap; source = 'file'; run(); return; }
         source = v; if (v === 'file') { const [f] = await pickFile('image/*'); if (f) fileImg = await createImageBitmap(f); } run();
       }, 'Which picture to convert.'),
       select('Characters', o.charset, [{ value: 'detailed', label: 'Detailed (70 chars)' }, { value: 'classic', label: 'Classic  .:-=+*#%@' }, { value: 'blocks', label: 'Blocks ░▒▓█' }, { value: 'dots', label: 'Braille dots' }, { value: 'letters', label: 'Letters' }, { value: 'custom', label: 'Custom…' }], (v) => {
